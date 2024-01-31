@@ -16,8 +16,11 @@ function CHaserConnect:Init()
   print("What is your name?")
   self.name = io.read()
 
-  -- create socket connection
-  self.socket = socket.connect(self.ip, self.port)
+  -- create tcp socket
+  self.socket = socket.tcp()
+  -- connect
+  self.socket:connect(self.ip, self.port)
+  
   if self.socket then
     print("Connection established!")
   else
