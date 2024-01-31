@@ -14,7 +14,7 @@ body:
         required: true
 - type: textarea
   attributes:
-    label: 'Is your feature request related to a problem? Please describe.'
+    label: 'Is your feature request related to a problem?'
     description: 'A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]'
     placeholder: 'I was trying to [...] but [...]'
     render: shell
