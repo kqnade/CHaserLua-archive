@@ -26,6 +26,8 @@ while true do
     if message == "quit" then
       print("Client requested to close the connection.")
       break
+
+     -- Walk commands responces 
     elseif message == "wu\n" then
       print("Client requested to walk up.")
       response = "Server received: " .. message
