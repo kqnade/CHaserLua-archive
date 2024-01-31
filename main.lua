@@ -5,6 +5,9 @@ local socket = require("socket")
 local chaser = CHaserConnect:Init()
 chaser:InitSocket()
 
-while true do
-  chaser:GetReady()
-end
+chaser:GetReady()
+
+chaser:Walk("up")
+chaser:Walk("down")
+chaser:Walk("left")
+chaser:Walk("right")
