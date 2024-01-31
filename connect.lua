@@ -16,8 +16,11 @@ function CHaserConnect:Init()
   print("What is your name?")
   self.name = io.read()
 
-  -- create socket connection
-  self.socket = socket.connect(self.ip, self.port)
+  -- create tcp socket
+  self.socket = socket.tcp()
+  -- connect
+  self.socket:connect(self.ip, self.port)
+
   if self.socket then
     print("Connection established!")
   else
@@ -43,5 +46,20 @@ function CHaserConnect:GetReady()
   self.socket:send("gr\n")
 end
 
+function CHaserConnect:Walk(direction)
+  print(self.name .. " requested to walk " .. direction .. ".")
+  if direction == "up" then
+    self.socket:send("wu\n")
+  elseif direction == "down" then
+    self.socket:send("wd\n")
+  elseif direction == "left" then
+    self.socket:send("wl\n")
+  elseif direction == "right" then
+    self.socket:send("wr\n")
+  end
+  local response = self.socket:receive()
+  local results = tonumber(msg)
+  return results
+end
 
 return CHaserConnect

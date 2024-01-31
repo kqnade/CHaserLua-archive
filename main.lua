@@ -7,6 +7,7 @@ chaser:InitSocket()
 
 chaser:GetReady()
 
-while true do
-  chaser:GetReady()
-end
+chaser:Walk("up")
+chaser:Walk("down")
+chaser:Walk("left")
+chaser:Walk("right")
