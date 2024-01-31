@@ -5,36 +5,43 @@ local socket = require("socket")
 CHaserConnect = {}
 CHaserConnect.__index = CHaserConnect
 
-function CHaserConnect:New()
-  local self = setmetatable({}, CHaserConnect)
-  self.name = name
-  self.socket = nil
-  return self
-end
-
-function CHaserConnect:init(name)
-  self.name = name
-  
+function CHaserConnect:Init()
   -- io ip
-  print("Please input ip address")
-  local ip = io.read()
+  print("Please input the IP address:")
+  self.ip = io.read()
   -- io port
-  print("Please input port number")
-  local port = io.read()
+  print("Please input the port number:")
+  self.port = io.read()
+  -- io name
+  print("What is your name?")
+  self.name = io.read()
 
-  -- connect
-  self.socket = socket.connect(ip, port)
-  print("Connecting to " .. ip .. ":" .. port .. " ...")
-  if self.socket == nil then
-    print("Connection failed")
-    return
+  -- create socket connection
+  self.socket = socket.connect(self.ip, self.port)
+  if self.socket then
+    print("Connection established!")
+  else
+    print("Connection failed!")
   end
 
-  -- send name
-  self.socket:send(name .. "\n")
-  print("Connected")
+  -- set timeout
+  self.socket:settimeout(0.1)
+
+  -- create instance
+  local instance = {}
+  setmetatable(instance, CHaserConnect)
+  return instance
 end
 
-function CHaserConnect:send(str)
-  self.socket:send(str .. "\n")
+function CHaserConnect:InitSocket()
+  -- send name
+  self.socket:send(self.name .. "\n")
 end
+
+function CHaserConnect:GetReady()
+  -- send ready
+  self.socket:send("gr\n")
+end
+
+
+return CHaserConnect
