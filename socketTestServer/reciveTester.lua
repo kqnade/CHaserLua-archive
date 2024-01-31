@@ -1,21 +1,35 @@
 local socket = require("socket")
 
-local server = socket.bind("localhost", 12345)  -- ローカルホストのポート12345で接続を待機
+local server = socket.bind("localhost", 1234) -- Replace "localhost" with your desired IP address
+print("Server started, waiting for connections...")
 
 while true do
-  local client = server:accept()  -- クライアントからの接続を待機
-  local line, err = client:receive()  -- クライアントからのデータを受信
-  
-  if line then
-    print("Received data: " .. line)
-  elseif err == "closed" then
-    break  -- クライアントが接続を切断した場合はループを終了
-  else
-    print("Error: " .. err)
-    break
-  end
-  
-  client:close()  -- クライアントとの接続を閉じる
-end
+  local client = server:accept()
+  print("New connection established!")
 
-server:close()  -- サーバの接続を閉じる
+  -- Handle the client connection
+  while true do
+    local message, err = client:receive()
+    if err then
+      print("Connection closed by client.")
+      break
+    end
+
+    -- Process the received message
+    print("Received message: " .. message)
+
+    -- Send a response back to the client
+    local response = "Server received: " .. message
+    client:send(response .. "\n")
+
+    -- Check if the client wants to close the connection
+    if message == "quit" then
+      print("Client requested to close the connection.")
+      break
+    end
+  end
+
+  -- Close the client connection
+  client:close()
+  print("Connection closed.")
+end
