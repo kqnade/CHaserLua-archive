@@ -20,7 +20,7 @@ function CHaserConnect:Init()
   self.socket = socket.tcp()
   -- connect
   self.socket:connect(self.ip, self.port)
-  
+
   if self.socket then
     print("Connection established!")
   else
@@ -46,5 +46,17 @@ function CHaserConnect:GetReady()
   self.socket:send("gr\n")
 end
 
+function CHaserConnect:Walk(direction)
+  local directions = {
+    up = "wu\n",
+    down = "wd\n",
+    left = "wl\n",
+    right = "wr\n"
+  }
+  local formattedDirection = directions[direction]
+  if formattedDirection then
+    self.socket:send(formattedDirection)
+  end
+end
 
 return CHaserConnect
