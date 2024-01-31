@@ -26,6 +26,22 @@ while true do
     if message == "quit" then
       print("Client requested to close the connection.")
       break
+    elseif message == "wu\n" then
+      print("Client requested to walk up.")
+      response = "Server received: " .. message
+      client:send(response .. "\n")
+    elseif message == "wd\n" then
+      print("Client requested to walk down.")
+      response = "Server received: " .. message
+      client:send(response .. "\n")
+    elseif message == "wl\n" then
+      print("Client requested to walk left.")
+      response = "Server received: " .. message
+      client:send(response .. "\n")
+    elseif message == "wr\n" then
+      print("Client requested to walk right.")
+      response = "Server received: " .. message
+      client:send(response .. "\n")
     end
   end
 

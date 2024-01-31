@@ -47,16 +47,19 @@ function CHaserConnect:GetReady()
 end
 
 function CHaserConnect:Walk(direction)
-  local directions = {
-    up = "wu\n",
-    down = "wd\n",
-    left = "wl\n",
-    right = "wr\n"
-  }
-  local formattedDirection = directions[direction]
-  if formattedDirection then
-    self.socket:send(formattedDirection)
+  print(self.name .. " requested to walk " .. direction .. ".")
+  if direction == "up" then
+    self.socket:send("wu\n")
+  elseif direction == "down" then
+    self.socket:send("wd\n")
+  elseif direction == "left" then
+    self.socket:send("wl\n")
+  elseif direction == "right" then
+    self.socket:send("wr\n")
   end
+  local response = self.socket:receive()
+  local results = tonumber(msg)
+  return results
 end
 
 return CHaserConnect
