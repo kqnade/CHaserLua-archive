@@ -11,3 +11,8 @@ chaser:Walk("up")
 chaser:Walk("down")
 chaser:Walk("left")
 chaser:Walk("right")
+
+chaser:Look("up")
+chaser:Look("down")
+chaser:Look("left")
+chaser:Look("right")
