@@ -27,9 +27,6 @@ function CHaserConnect:Init()
     print("Connection failed!")
   end
 
-  -- set timeout
-  self.socket:settimeout(0.1)
-
   -- create instance
   local instance = {}
   setmetatable(instance, CHaserConnect)
