@@ -27,9 +27,6 @@ function CHaserConnect:Init()
     print("Connection failed!")
   end
 
-  -- set timeout
-  self.socket:settimeout(0.1)
-
   -- create instance
   local instance = {}
   setmetatable(instance, CHaserConnect)
@@ -56,6 +53,22 @@ function CHaserConnect:Walk(direction)
     self.socket:send("wl\n")
   elseif direction == "right" then
     self.socket:send("wr\n")
+  end
+  local response = self.socket:receive()
+  local results = tonumber(msg)
+  return results
+end
+
+function CHaserConnect:Look(direction)
+  print(self.name .. " requested to look " .. direction .. ".")
+  if direction == "up" then
+    self.socket:send("lu\n")
+  elseif direction == "down" then
+    self.socket:send("ld\n")
+  elseif direction == "left" then
+    self.socket:send("ll\n")
+  elseif direction == "right" then
+    self.socket:send("lr\n")
   end
   local response = self.socket:receive()
   local results = tonumber(msg)
