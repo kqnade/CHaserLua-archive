@@ -1,11 +1,11 @@
 name: Feature Request
 description: Suggest an idea for this project
 title: '[FEATURE] <title>'
-labels: enhancement
+labels: "Categoly::Enhancement", "Type::Report"
 body:
 - type: checkboxes
   attributes:
-    label: 'Checkboxes'
+    label: 'Pre-checks'
     description: 'Check the boxes that apply'
     options:
       - label: 'I have searched the [issues](https://github.com/kqnade/CHaserLua/issues) of this repository and believe that this is not a duplicate.'
